@@ -1,5 +1,5 @@
 import { response } from "express";
-import User from "../models/user";
+import User from "../models/user.js";
 
 
 export const registerUser = async (req, res )=>{
@@ -38,3 +38,4 @@ export const registerUser = async (req, res )=>{
         res.status(500).json({ message :'Server Error', error : error.message})
     }
 };
+
