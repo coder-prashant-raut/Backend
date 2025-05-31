@@ -1,15 +1,22 @@
 import { config } from 'dotenv';
 import express from 'express'
 import dotenv from 'dotenv'
-dotenv.config();
+
+import connectDB from './config/db.js'
+
+dotenv.config(); // loadeing environment variables 
 
 const app = express()
 
-app.use(express.json())
+app.use(express.json()) // parse incoming json
 
+
+//connect DB
+
+connectDB()
 
 app.get('/', (req, res)=>{
-    res.send("Welcome to Chai Or code ")
+    res.send("Backend Is live and connect to MongoDB ")
 })
 
 const PORT = process.env.PORT || 5000
