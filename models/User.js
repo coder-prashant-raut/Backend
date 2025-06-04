@@ -23,6 +23,12 @@ const userSchema = new mongoose.Schema({
         required : [true, 'Password is Required !'],
         minlength : [6, 'Password must be at least 6 characters '],
         select : false , // prevents it from showing in queries by default
+    },
+
+    role:{
+        type: String,
+        enum : ['user', 'admin'],
+        default : 'user',
     }
 },{
     timestamps : true,
@@ -41,6 +47,6 @@ userSchema.pre('save', async function (next) {
 
 userSchema.methods.matchPassword = async function (enteredPassword) {
     return await bcrypt.compare(enteredPassword, this.password);
-};
+};  
 
 export const User = mongoose.model('User', userSchema)

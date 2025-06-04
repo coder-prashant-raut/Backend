@@ -4,10 +4,11 @@ import { protect } from '../middlewares/authMiddleware.js';
 const router = express.Router();
 
 router.post('/users', createUser);
-router.get('/users', getUsers);
+router.get('/users',protect, getUsers)  ; // add protect
+ // now protected
 router.put('/users/:id', updateUser);
 router.delete('/users/:id', deleteUser)
 
-router.get('/', protect, getUsers); // now protected
+
 export default router;
 

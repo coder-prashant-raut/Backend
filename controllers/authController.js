@@ -26,6 +26,7 @@ export const register = async (req, res, next)=>{
             _id: user._id,
             name : user.name,
             email: user.email,
+            role : user.admin,
             token: generateToken(user._id),
         });
       } catch (error) {
@@ -40,7 +41,7 @@ export const login = async (req, res, next) =>{
 
         const user = await User.findOne({email}).select('+password');
 
-        if(!user || !(await user.matachPassword(password))) {
+        if(!user || !(await user.matchPassword(password))) {
             res.status(401);
             throw new Error('Invalid email or password')
         }
