@@ -62,7 +62,7 @@ export const deleteUser = async (req, res, next) =>{
    try {
       const {id} = req.params;
       await User.findByIdAndDelete(id);
-      if(!User){
+      if(!deleteUser){
          res.status(404);
          throw new Error("User Not Found");
       }
@@ -71,3 +71,18 @@ export const deleteUser = async (req, res, next) =>{
       next(error);
    }
 };
+
+
+//getme  
+
+
+export const getme = async (req, res)=>{
+   req.json({
+id:req.user_id,
+name: req.user.name,
+email: req.user.email,
+role:req.user.role,
+   });
+};
+
+
