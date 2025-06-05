@@ -58,20 +58,22 @@ export const updateUser = async (req, res, next) =>{
 
 //delete user
 
-export const deleteUser = async (req, res, next) =>{
-   try {
-      const {id} = req.params;
-      await User.findByIdAndDelete(id);
-      if(!deleteUser){
-         res.status(404);
-         throw new Error("User Not Found");
-      }
-      res.json({message : 'User deleted'});
-   } catch (error) {
-      next(error);
-   }
-};
+export const deleteUser = async (req, res, next) => {
+  try {
+    const { id } = req.params;
 
+    const deletedUser = await User.findByIdAndDelete(id);
+
+    if (!deletedUser) {
+      res.status(404);
+      throw new Error("User Not Found");
+    }
+
+    res.json({ message: "User deleted" });
+  } catch (error) {
+    next(error);
+  }
+};
 
 //getme  
 

@@ -1,6 +1,11 @@
 export const authorize= (...roles) =>{
     return (req, res, next) =>{
-         if (!req.user) {
+    console.log('🔐 AUTH CHECK');
+    console.log('Roles allowed:', roles);
+    console.log('User:', req.user);
+    console.log('User Role:', req.user?.role);
+
+      if (!req.user) {
       res.status(401);
       return next(new Error('Not authenticated'));
     }
